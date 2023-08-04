@@ -4,11 +4,11 @@ export const FavoritosContext = createContext();
 FavoritosContext.displayName = "Favoritos";
 
 export default function FavoritosProvider({ children }) {
-    const [favoritos, setFavorito] = useState([]);
+    const [favorito, setFavorito] = useState([]);
 
     return (
         <FavoritosContext.Provider
-            value={{ favoritos, setFavorito }}>
+            value={{ favorito, setFavorito }}>
             {children}
         </FavoritosContext.Provider>
     )
