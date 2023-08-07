@@ -4,12 +4,18 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import videos from 'json/db.json';
 import styles from "./Player.module.css"
+import NaoEncontrada from 'Pages/NaoEncontrada';
 
 export default function Player() {
   const parametros = useParams();// esse Hook vai pegar o valor da URL e jogar na variável
   const video = videos.find((video) => {
     return video.id === Number(parametros.id);
   })
+
+  if (!video) {
+    return <NaoEncontrada />
+  }
+
   return (
     <>
       <Banner imagem="player" />
