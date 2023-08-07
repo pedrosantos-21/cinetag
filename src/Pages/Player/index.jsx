@@ -1,16 +1,21 @@
 import Banner from 'Components/Banner'
 import Titulo from 'Components/Titulo'
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import videos from 'json/db.json';
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'      
 import styles from "./Player.module.css"
 import NaoEncontrada from 'Pages/NaoEncontrada';
 
 export default function Player() {
+  const [video, setVideo] = useState();
   const parametros = useParams();// esse Hook vai pegar o valor da URL e jogar na variável
-  const video = videos.find((video) => {
-    return video.id === Number(parametros.id);
-  })
+
+  useEffect(() => {
+    fetch(`https://my-json-server.typicode.com/pedrosantos-21/cinetag-api/videos?id=${parametros.id}`)
+      .then(resposta => resposta.json())
+      .then(dados => {
+        setVideo(...dados)
+      })
+  }, [])
 
   if (!video) {
     return <NaoEncontrada />
